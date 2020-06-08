@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/style.css" />
+    <link rel="stylesheet" type="text/css" href="./style.css" />
+    <script
+      src="https://kit.fontawesome.com/71fa7ab7c8.js"
+      crossorigin="anonymous"
+    ></script>
+    <template>
+      <div class="d-flex justify-content-center">
+        <form class="col-4" action="#" @submit.prevent="logeado">
+          <div class="form-group mt-5">
+            <label for="exampleInputEmail1" class="h4">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Escribe tu email..."
+              v-model="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="h4">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Escribe tu contraseña..."
+              v-model="contraseña"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >No reveles nunca tu contraseña.</small
+            >
+          </div>
+          <button class="btn btn-primary mt-2 mr-2 btn-lg" type="submit">
+            Entrar
+            <i class="fas fa-envelope"></i>
+          </button>
+          <button class="btn btn-danger mt-2 btn-lg">
+            Google
+            <i class="fab fa-google"></i>
+          </button>
+        </form>
+      </div>
+    </template>
+
+    <script>
+      import firebase from "firebase";
+      import db from "@/config.js";
+      export default {
+        name: "Login",
+        data() {
+          return {
+            email: "",
+            contraseña: "",
+            error: ""
+          };
+        },
+        methods: {
+          logeado() {
+            if (this.email && this.contraseña) {
+              firebase
+                .auth()
+                .signInWithEmailAndPassword(this.email, this.contraseña)
+                .then(user => {
+                  alert("correcto");
+                  this.$router.push({ name: "dashboard" });
+                })
+                .catch(err => {
+                  this.error = err.message;
+                });
+            } else {
+              this.error = "Todos los campos son requeridos";
+            }
+          }
+          /*inicio() {
+      if (email && contraseña) {
+        firebase.auth().signInWithEmailAndPassword(this.email, this.contraseña)
+        .then(user => )
+      } else {
+        this.error = "Todos los campos son obligatorios";
+      }
+    }*/
+        }
+      };
+    </script>
+    <template>
+      <div class="d-flex justify-content-center">
+        <form class="col-4" action="#" @submit.prevent="logeado">
+          <div class="form-group mt-5">
+            <label for="exampleInputEmail1" class="h4">Email</label>
+            <input
+              type="email"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Escribe tu email..."
+              v-model="email"
+            />
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1" class="h4">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="exampleInputPassword1"
+              placeholder="Escribe tu contraseña..."
+              v-model="contraseña"
+            />
+            <small id="emailHelp" class="form-text text-muted"
+              >No reveles nunca tu contraseña.</small
+            >
+          </div>
+          <button class="btn btn-primary mt-2 mr-2 btn-lg" type="submit">
+            Entrar
+            <i class="fas fa-envelope"></i>
+          </button>
+          <button class="btn btn-danger mt-2 btn-lg">
+            Google
+            <i class="fab fa-google"></i>
+          </button>
+        </form>
+      </div>
+    </template>
+
+    <script>
+      import firebase from "firebase";
+      import db from "@/config.js";
+      export default {
+        name: "Login",
+        data() {
+          return {
+            email: "",
+            contraseña: "",
+            error: ""
+          };
+        },
+        methods: {
+          logeado() {
+            if (this.email && this.contraseña) {
+              firebase
+                .auth()
+                .signInWithEmailAndPassword(this.email, this.contraseña)
+                .then(user => {
+                  alert("correcto");
+                  this.$router.push({ name: "dashboard" });
+                })
+                .catch(err => {
+                  this.error = err.message;
+                });
+            } else {
+              this.error = "Todos los campos son requeridos";
+            }
+          }
+          /*inicio() {
+      if (email && contraseña) {
+        firebase.auth().signInWithEmailAndPassword(this.email, this.contraseña)
+        .then(user => )
+      } else {
+        this.error = "Todos los campos son obligatorios";
+      }
+    }*/
+        }
+      };
+    </script>
+    <title>instafilm</title>
+    <style>
+      body {
+        font-family: "Montserrat", sans-serif !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <!-- built files will be auto injected -->
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="/__/firebase/7.13.2/firebase-app.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="/__/firebase/7.13.2/firebase-analytics.js"></script>
+
+    <!-- Initialize Firebase -->
+    <script src="/__/firebase/init.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

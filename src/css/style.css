@@ -1,0 +1,141 @@
+.fondoRegistro {
+  background-image: url("../assets/fondoregistro.jpg");
+  background-size: cover;
+  position: absolute;
+  min-height: 100%;
+  min-width: 100%;
+  width: 0;
+}
+.sinopsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.panel {
+  background-color: #e7e7e7;
+  clear: both;
+  height: 100%;
+}
+.textoNaranja {
+  color: #f35c13;
+}
+
+.colorPrincipal {
+  background-color: #f35c13;
+}
+.zoom {
+  transition: transform 0.2s; /* Animation */
+}
+
+.zoom:hover {
+  transform: scale(1.04);
+  border-radius: 0.8rem !important;
+  box-shadow: 1px 0px 10px 1px rgba(0, 0, 0, 0.6);
+}
+
+.quitar {
+  text-decoration: none !important;
+  border-radius: 0.8rem !important;
+}
+
+.card:hover .overlay {
+  opacity: 0.8;
+  border-radius: 0.8rem;
+}
+
+.image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 0.8rem;
+}
+
+h4 {
+  font-weight: bold;
+}
+
+a {
+  text-decoration: none;
+  color: #626262;
+}
+
+.nav-link > h5 > i {
+  color: #fd7e14;
+}
+
+.lateral {
+  margin-bottom: 2px;
+}
+
+.lateral:hover i {
+  color: black;
+}
+
+.nav-item {
+  text-decoration: none !important;
+}
+
+.barra {
+  border-right: 0.1px solid #dadada;
+}
+
+.card-text {
+  height: 55px !important;
+}
+
+.jumbotronInicio {
+  background-image: url("../assets/fondo.jpg");
+  background-size: cover;
+}
+
+.jumbotronContacto {
+  background-image: url("../assets/contacto.jpg");
+  background-size: 100% 100%;
+}
+
+.productora {
+  background-image: url("../assets/productora.png");
+  background-size: 100% 100%;
+}
+
+.dividido {
+  border-left: 1px solid;
+  padding-left: 5px;
+}
+
+.botonMegusta {
+  background-color: red;
+}
+
+button {
+  border: none;
+  background: none;
+}
+
+.lateral:hover button {
+  border: none;
+  background: none;
+  color: black;
+}
+
+.footer-copyright > a {
+  text-decoration: none;
+}
+
+.footer-copyright > a:hover {
+  color: #dedede;
+}
+
+a {
+  text-decoration: none !important;
+}
+
+.dropdown-item.active,
+.dropdown-item:active {
+  background-color: transparent !important;
+  color: black !important;
+}
+
+.list-group > .active {
+  background-color: #f35c13 !important;
+}
