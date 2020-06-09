@@ -67,7 +67,7 @@
           </div>
         </template>
         <template v-if="categoriaON === 'Añadir'">
-          <AddPeliculas :usuario="this.user"></AddPeliculas>
+          <AddPeliculas :usuario="this.user" @click="cambiarCategoria('Trabajos')"></AddPeliculas>
         </template>
         <template v-else-if="categoriaON === 'Trabajos'">
           <Trabajos></Trabajos>

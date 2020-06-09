@@ -21,8 +21,14 @@
         <div class="tab-content">
           <div class="tab-pane active" id="pelicula" role="tabpanel">
             <form class="row" action="#" @submit.prevent="enviarPelicula">
-              <div class="col-4 mr-5">
-                <img v-if="!cargado" src="../../assets/cartel.jpg" alt class="pb-4 rounded" />
+              <div class="col-5">
+                <img
+                  v-if="!cargado"
+                  src="../../assets/cartel.jpg"
+                  alt
+                  class="pb-4 rounded"
+                  style="width: 250px"
+                />
 
                 <img v-else :src="portada" alt class="pb-4 rounded" style="width: 250px" />
                 <input type="file" @change="onFileSelected" required />
@@ -33,7 +39,7 @@
                 >Debes cargar la imagen</div>
 
                 <button
-                  class="btn colorPrincipal text-light mt-2 mr-2 btn-lg"
+                  class="btn colorPrincipal text-light mt-2 mr-2"
                   @click="onUpload"
                   data-toggle="modal"
                   data-target="#myModal"
@@ -48,6 +54,18 @@
                     placeholder="Escribe un nombre"
                     id="nombre"
                     v-model="nombre"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="sinopsis" class="h4">Sinopsis</label>
+                  <textarea
+                    rows="4"
+                    type="text"
+                    class="form-control"
+                    placeholder="Escribe una sinopsis"
+                    id="sinopsis"
+                    v-model="sinopsis"
                     required
                   />
                 </div>
@@ -72,7 +90,20 @@
                     required
                   />
                 </div>
-                <button class="btn colorPrincipal text-light mt-2 mr-2 btn-lg" type="submit">Añadir</button>
+                <button
+                  v-if="!clickAñadir"
+                  class="btn colorPrincipal text-light mt-2 btn-lg"
+                  type="submit"
+                >Añadir</button>
+                <button
+                  v-else
+                  class="btn colorPrincipal text-light btn-lg mt-2"
+                  type="button"
+                  disabled
+                >
+                  <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                  Enviando...
+                </button>
               </div>
             </form>
             <div
@@ -99,8 +130,14 @@
           </div>
           <div class="tab-pane" id="noticia" role="tabpanel">
             <form class="row" action="#">
-              <div class="col-4 mr-5">
-                <img v-if="!cargado" src="../../assets/cartel.jpg" alt class="pb-4 rounded" />
+              <div class="col-5">
+                <img
+                  v-if="!cargado"
+                  src="../../assets/cartel.jpg"
+                  alt
+                  class="pb-4 rounded"
+                  style="width: 250px"
+                />
 
                 <img v-else :src="imagenNoticia" alt class="pb-4 rounded" style="width: 250px" />
                 <input type="file" @change="onFileSelected" required />
@@ -111,7 +148,7 @@
                 >Debes cargar la imagen</div>
 
                 <button
-                  class="btn colorPrincipal text-light mt-2 mr-2 btn-lg"
+                  class="btn colorPrincipal text-light mt-2 mr-2"
                   @click="subirImagenNoticia"
                   data-toggle="modal"
                   data-target="#myModal"
@@ -167,6 +204,7 @@ export default {
       megusta: 0,
       portada: null,
       video: null,
+      sinopsis: null,
       selectedFile: null,
       cargado: null,
       tamaño: 0,
@@ -178,12 +216,14 @@ export default {
       cuerpo: null,
       imagenNoticia: null,
       idProductora: null,
-      fecha: null
+      fecha: null,
+      clickAñadir: null
     };
   },
   props: ["usuario"],
   methods: {
     enviarPelicula() {
+      this.clickAñadir = true;
       if (!this.errorExtension && this.cargado) {
         db.collection("peliculas")
           .add({
@@ -193,14 +233,19 @@ export default {
             megusta: this.megusta,
             portada: this.portada,
             productora: this.usuario.displayName,
-            fecha: this.fecha
+            sinopsis: this.sinopsis
           })
           .then(() => {
-            this.$emit("click", "Trabajos");
+            var otrothis = this;
+            setTimeout(function() {
+              otrothis.clickAñadir = false;
+              otrothis.$emit("click");
+            }, 1500);
           });
       }
     },
     enviarNoticia() {
+      this.clickAñadir = true;
       var fechaLarga = new Date();
       var mes = fechaLarga.getMonth() + 1;
       var fechaCadena =

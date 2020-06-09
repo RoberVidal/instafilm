@@ -139,3 +139,10 @@ a {
 .list-group > .active {
   background-color: #f35c13 !important;
 }
+
+input[type="file"] {
+  width: 300px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
